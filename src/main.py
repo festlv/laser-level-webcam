@@ -204,9 +204,15 @@ class MainWindow(QMainWindow):  # type: ignore
 
         self.graph.samples = self.core.samples
 
+        cur_idx = 0
+        tar_idx = 0
         for cam in self.core.get_cameras():
             self.camera_combo.addItem(cam)
+            if cam.startswith("HBV"):
+                tar_idx = cur_idx
+            cur_idx += 1
 
+        self.camera_combo.setCurrentIndex(tar_idx)
         self.core.set_camera(self.camera_combo.currentIndex())
 
         # Signals

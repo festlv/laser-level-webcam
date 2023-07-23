@@ -142,6 +142,7 @@ class FrameWorker(QObject):  # type: ignore
             histo = np.mean(qimage2ndarray.raw_view(image), axis=0)
         except ValueError as e:
             print("Invalid QImage:", e)
+            self.ready = True
             return
 
         pixmap = QPixmap.fromImage(image).transformed(QTransform().rotate(-90))
