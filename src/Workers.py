@@ -137,7 +137,7 @@ class FrameWorker(QObject):  # type: ignore
         self.ready = False
 
         # Get the frame as a gray scale image
-        image = frame.toImage().convertToFormat(QImage.Format_Grayscale8)
+        image = frame.toImage().convertToFormat(QImage.Format_Grayscale8).transformed(QTransform().rotate(180))
         try:
             histo = np.mean(qimage2ndarray.raw_view(image), axis=0)
         except ValueError as e:
